@@ -173,6 +173,9 @@ public class Login extends javax.swing.JFrame {
 
     private void confirm_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirm_loginMouseClicked
         JOptionPane.showMessageDialog(null, "Olá, você fez o login!", "Login realizado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+        SistemaFrequencia s = new SistemaFrequencia();
+        this.dispose();
+        s.setVisible(true);
     }//GEN-LAST:event_confirm_loginMouseClicked
 
     private void cancel_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_loginMouseClicked

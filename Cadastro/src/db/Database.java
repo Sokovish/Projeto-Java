@@ -10,5 +10,5 @@ package db;
  * @author 01755833
  */
 public class Database {
-    public 
-}
+   
+};
