@@ -5,6 +5,12 @@
 package view;
 
 
+import dao.conexao;
+import dao.usuarioDAO;
+import modell.Usuario;
+
+import java.sql.SQLException;
+
 public class CadastroUserLogin extends javax.swing.JFrame {
 
     /**
@@ -82,7 +88,16 @@ public class CadastroUserLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUserActionPerformed
-        
+        // TODO
+        // verificação de email e senha válidos
+        //
+        // puxar os dados inseridos nos campos da janela para inserir no db
+        //
+        try {
+            new usuarioDAO(new conexao().getConnection()).insert(new Usuario("fred@gmail.com", "senha"));
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao inserir no banco de dados.");
+        }
     }//GEN-LAST:event_btnCadastrarUserActionPerformed
 
     /**

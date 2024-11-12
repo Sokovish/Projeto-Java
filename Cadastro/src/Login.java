@@ -3,6 +3,8 @@ import javax.swing.JOptionPane;
 import utils.NewJDialog;
 import view.CadastroUserLogin;
 
+import java.sql.Connection;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -194,10 +196,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_confirm_loginActionPerformed
 
     private void confirm_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirm_loginMouseClicked
-        JOptionPane.showMessageDialog(null, "Olá, você fez o login!", "Login realizado com sucesso", JOptionPane.INFORMATION_MESSAGE);
-        SistemaFrequencia s = new SistemaFrequencia();
-        this.dispose();
-        s.setVisible(true);
+
+        if(jTextField1.getText().equals("fred") && jPasswordField1.getText().equals("123")){
+            JOptionPane.showMessageDialog(null, "Olá, você fez o login!", "Login realizado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+            SistemaFrequencia s = new SistemaFrequencia();
+            this.dispose();
+            s.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Email e senha inválidos.", "Erro", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }//GEN-LAST:event_confirm_loginMouseClicked
 
     private void cancel_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancel_loginMouseClicked

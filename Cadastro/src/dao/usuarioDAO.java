@@ -6,6 +6,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modell.Usuario;
@@ -25,5 +26,10 @@ public class usuarioDAO {
             statement.execute();
             
             connection.close();
+    }
+    public boolean verify(String email, String senha) throws SQLException {
+        // TODO
+        // ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM usuario WHERE login = '");
+        return false;
     }
 }
