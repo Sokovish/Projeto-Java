@@ -5,9 +5,10 @@ public class Usuario {
     private String email;
     private String senha;
 
-    public Usuario(String email, String senha) {
-        this.email = email;
-        this.senha = senha;
+ public Usuario (String email, String senha) {
+     this.email = email;
+     this.senha = senha;
+     
     }
 
     public String getEmail() {
@@ -25,4 +26,5 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
 }

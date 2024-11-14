@@ -4,12 +4,14 @@
  */
 package view;
 
-
-import dao.conexao;
-import dao.usuarioDAO;
+import java.sql.Connection;
+import dao.Conexao;
+import dao.UsuarioDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modell.Usuario;
 
-import java.sql.SQLException;
 
 public class CadastroUserLogin extends javax.swing.JFrame {
 
@@ -88,16 +90,20 @@ public class CadastroUserLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarUserActionPerformed
-        // TODO
-        // verificação de email e senha válidos
-        //
-        // puxar os dados inseridos nos campos da janela para inserir no db
-        //
+        
+            String email = emailUser.getText();
+            String senha = senhaUser.getText();
+            
+            Usuario usuarioCad = new Usuario(email, senha);
+            
         try {
-            new usuarioDAO(new conexao().getConnection()).insert(new Usuario("fred@gmail.com", "senha"));
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao inserir no banco de dados.");
+            Connection Conexao = (Connection) new Conexao().getConnection();
+            UsuarioDAO UsuarioDao = new UsuarioDAO((java.sql.Connection) Conexao);
+            UsuarioDao.insert(usuarioCad);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroUserLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btnCadastrarUserActionPerformed
 
     /**

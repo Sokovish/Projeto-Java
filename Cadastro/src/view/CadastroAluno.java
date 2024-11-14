@@ -1,5 +1,13 @@
 package view;
 
+import dao.Conexao;
+import dao.AlunoDao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modell.Aluno;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -29,8 +37,8 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        NomeAluno = new javax.swing.JTextField();
-        MatriculaAluno = new javax.swing.JTextField();
+        nomeAluno = new javax.swing.JTextField();
+        matriculaAluno = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -45,6 +53,12 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CADASTRO ALUNO");
 
+        nomeAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeAlunoActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nome do Aluno:");
 
@@ -53,6 +67,11 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         btnCadastrarAluno.setBackground(new java.awt.Color(153, 255, 153));
         btnCadastrarAluno.setText("Cadastar");
+        btnCadastrarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarAlunoActionPerformed(evt);
+            }
+        });
 
         btnCancelarCadastro.setBackground(new java.awt.Color(255, 102, 102));
         btnCancelarCadastro.setText("Cancelar");
@@ -81,8 +100,8 @@ public class CadastroAluno extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MatriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(matriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -97,12 +116,12 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MatriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(matriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -130,6 +149,26 @@ public class CadastroAluno extends javax.swing.JFrame {
         this.dispose();
         sistema.setVisible(true);
     }//GEN-LAST:event_btnCancelarCadastroMouseClicked
+
+    private void nomeAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeAlunoActionPerformed
+        
+    }//GEN-LAST:event_nomeAlunoActionPerformed
+
+    private void btnCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAlunoActionPerformed
+         String nome = nomeAluno.getText();
+            String matricula = matriculaAluno.getText();
+            
+            Aluno alunoCad = new Aluno(nome, matricula);
+            
+        try {
+            Connection Conexao = (Connection) new Conexao().getConnection();
+            AlunoDao AlunoDAO = new AlunoDao((java.sql.Connection) Conexao);
+            AlunoDAO.insert(alunoCad);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroUserLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnCadastrarAlunoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,8 +206,6 @@ public class CadastroAluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField MatriculaAluno;
-    private javax.swing.JTextField NomeAluno;
     private javax.swing.JButton btnCadastrarAluno;
     private javax.swing.JButton btnCancelarCadastro;
     private javax.swing.JLabel jLabel1;
@@ -176,5 +213,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField matriculaAluno;
+    private javax.swing.JTextField nomeAluno;
     // End of variables declaration//GEN-END:variables
 }
